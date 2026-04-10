@@ -92,7 +92,7 @@ Examples:
         help="Azure OpenAI deployment name (overrides AZURE_OPENAI_DEPLOYMENT env var)",
     )
 
-    cache_group = parser.add_argument_group("Caching (Supabase)")
+    cache_group = parser.add_argument_group("Caching (JSON files)")
     cache_group.add_argument(
         "--clear-cache", action="store_true",
         help="Invalidate cached responses for this agent before running",
@@ -100,6 +100,10 @@ Examples:
     cache_group.add_argument(
         "--cache-ttl", type=int, default=86400,
         help="Cache TTL in seconds (default: 86400 = 24h)",
+    )
+    cache_group.add_argument(
+        "--cache-dir", metavar="DIR", default=None,
+        help="Directory for JSON cache files (default: .agent_eval_cache or CACHE_DIR env var)",
     )
 
     return parser.parse_args()
@@ -149,8 +153,8 @@ def run_cli():
                 file=sys.stderr,
             )
 
-    cache = SupabaseResultCache(ttl_seconds=args.cache_ttl)
-    report_store = SupabaseReportStore()
+    cache = SupabaseResultCache(cache_dir=args.cache_dir, ttl_seconds=args.cache_ttl)
+    report_store = SupabaseReportStore(cache_dir=args.cache_dir)
 
     runner = EvaluationRunner(
         agent=agent,
@@ -172,6 +176,6 @@ def run_cli():
     print(f"\n  Report saved: {saved_path}\n")
 
     if report_store.available:
-        print(f"  Supabase report store: updated for {agent.name} v{agent.version}\n")
+        print(f"  Report store: updated for {agent.name} v{agent.version}\n")
 
     sys.exit(0 if report.deployable else 1)
