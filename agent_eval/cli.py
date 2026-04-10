@@ -5,12 +5,19 @@ Usage: python main.py [options]
 
 import argparse
 import importlib.util
+import os
 import sys
 from typing import Optional
 
+from dotenv import load_dotenv
+
+from agent_eval.cache.result_cache import SupabaseResultCache, SupabaseReportStore
 from agent_eval.core.base import AgentInterface, EvalMode
 from agent_eval.core.runner import EvaluationRunner
+from agent_eval.judges.llm_judge import LLMJudge
 from agent_eval.reports.generator import ReportGenerator
+
+load_dotenv()
 
 
 def parse_args():
@@ -24,6 +31,8 @@ Examples:
   python main.py --agent examples/sample_agent.py --scenarios examples/sample_scenarios.yaml
   python main.py --agent examples/sample_agent.py --modes black_box gray_box --output report.json
   python main.py --endpoint http://localhost:8000/agent --name "MyAgent"
+  python main.py --agent examples/sample_agent.py --llm-judge
+  python main.py --agent examples/sample_agent.py --clear-cache
         """,
     )
 
@@ -62,6 +71,37 @@ Examples:
         help="Deployability score threshold 0-100 (default: 70.0)",
     )
 
+    llm_group = parser.add_argument_group("LLM Judge (Azure OpenAI)")
+    llm_group.add_argument(
+        "--llm-judge", action="store_true",
+        help="Enable LLM-based evaluation using Azure OpenAI (requires AZURE_OPENAI_* env vars)",
+    )
+    llm_group.add_argument(
+        "--azure-endpoint", metavar="URL",
+        default=None,
+        help="Azure OpenAI endpoint URL (overrides AZURE_OPENAI_ENDPOINT env var)",
+    )
+    llm_group.add_argument(
+        "--azure-api-key", metavar="KEY",
+        default=None,
+        help="Azure OpenAI API key (overrides AZURE_OPENAI_KEY env var)",
+    )
+    llm_group.add_argument(
+        "--azure-deployment", metavar="NAME",
+        default=None,
+        help="Azure OpenAI deployment name (overrides AZURE_OPENAI_DEPLOYMENT env var)",
+    )
+
+    cache_group = parser.add_argument_group("Caching (Supabase)")
+    cache_group.add_argument(
+        "--clear-cache", action="store_true",
+        help="Invalidate cached responses for this agent before running",
+    )
+    cache_group.add_argument(
+        "--cache-ttl", type=int, default=86400,
+        help="Cache TTL in seconds (default: 86400 = 24h)",
+    )
+
     return parser.parse_args()
 
 
@@ -94,10 +134,32 @@ def run_cli():
 
     modes = [EvalMode(m) for m in args.modes]
 
+    llm_judge: Optional[LLMJudge] = None
+    if args.llm_judge:
+        llm_judge = LLMJudge(
+            endpoint=args.azure_endpoint,
+            api_key=args.azure_api_key,
+            deployment=args.azure_deployment,
+        )
+        if not llm_judge.available:
+            print(
+                "Warning: LLM judge requested but Azure OpenAI credentials are missing. "
+                "Set AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY, and AZURE_OPENAI_DEPLOYMENT "
+                "or pass --azure-endpoint / --azure-api-key / --azure-deployment.",
+                file=sys.stderr,
+            )
+
+    cache = SupabaseResultCache(ttl_seconds=args.cache_ttl)
+    report_store = SupabaseReportStore()
+
     runner = EvaluationRunner(
         agent=agent,
         scenario_file=args.scenarios,
         verbose=not args.quiet,
+        llm_judge=llm_judge,
+        cache=cache,
+        report_store=report_store,
+        clear_cache=args.clear_cache,
     )
     runner.DEPLOY_THRESHOLD = args.threshold
 
@@ -108,5 +170,8 @@ def run_cli():
 
     saved_path = report_gen.save_json(report, args.output)
     print(f"\n  Report saved: {saved_path}\n")
+
+    if report_store.available:
+        print(f"  Supabase report store: updated for {agent.name} v{agent.version}\n")
 
     sys.exit(0 if report.deployable else 1)

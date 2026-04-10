@@ -5,7 +5,7 @@ Validates functional correctness from an end-user perspective.
 
 import re
 import statistics
-from typing import List
+from typing import List, Optional
 
 from agent_eval.core.base import (
     AgentResponse,
@@ -20,7 +20,13 @@ class BlackBoxEvaluator:
     """
     Evaluates the agent purely on its observable input/output behavior.
     No access to prompts, code, or internal reasoning.
+
+    When an LLMJudge instance is provided, its semantic scores replace
+    or blend with the keyword-based baseline scores.
     """
+
+    def __init__(self, llm_judge=None):
+        self._judge = llm_judge
 
     def evaluate(self, scenario: TestScenario, responses: List[AgentResponse], mode: EvalMode) -> TestResult:
         result = TestResult(
@@ -70,6 +76,45 @@ class BlackBoxEvaluator:
 
         if not result.passed:
             result.failure_category, result.failure_reason = self._diagnose(scores, primary)
+
+        if self._judge and self._judge.available:
+            judge_result = self._judge.judge(
+                scenario_id=scenario.id,
+                scenario_name=scenario.name,
+                scenario_input=scenario.input,
+                expected_keywords=scenario.expected_keywords,
+                forbidden_keywords=scenario.forbidden_keywords,
+                expected_refusal=scenario.expected_refusal,
+                eval_mode=mode.value.upper(),
+                agent_output=primary.output,
+                reasoning_trace=primary.reasoning_trace,
+                tool_calls=primary.tool_calls,
+                token_usage=primary.token_usage,
+                latency=primary.latency,
+                max_latency_seconds=scenario.max_latency_seconds,
+                context=scenario.context,
+                tags=scenario.tags,
+                test_type=scenario.test_type.value,
+                internal_hints=scenario.internal_hints,
+                allowed_tools=scenario.allowed_tools,
+                error=primary.error,
+                runs_outputs=[r.output for r in responses],
+                fallback_score=result.score,
+            )
+            if judge_result is not None:
+                result.score = round(judge_result.score, 2)
+                result.passed = judge_result.passed
+                if judge_result.metrics:
+                    result.metrics.update({
+                        k: round(v, 2) if isinstance(v, (int, float)) else v
+                        for k, v in judge_result.metrics.items()
+                    })
+                if not result.passed and judge_result.failure_category:
+                    try:
+                        result.failure_category = FailureCategory(judge_result.failure_category)
+                    except ValueError:
+                        pass
+                    result.failure_reason = judge_result.failure_reason
 
         return result
 

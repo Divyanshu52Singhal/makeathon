@@ -24,9 +24,9 @@ class GrayBoxEvaluator:
     Most practical for balancing speed and depth.
     """
 
-    def __init__(self):
-        self._black_box = BlackBoxEvaluator()
-        self._white_box = WhiteBoxEvaluator()
+    def __init__(self, llm_judge=None):
+        self._black_box = BlackBoxEvaluator(llm_judge=llm_judge)
+        self._white_box = WhiteBoxEvaluator(llm_judge=llm_judge)
 
     def evaluate(self, scenario: TestScenario, responses: List[AgentResponse], mode: EvalMode) -> TestResult:
         bb_result = self._black_box.evaluate(scenario, responses, EvalMode.BLACK_BOX)

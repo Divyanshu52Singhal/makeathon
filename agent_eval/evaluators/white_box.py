@@ -24,8 +24,8 @@ class WhiteBoxEvaluator:
     Extends black-box checks with deep structural analysis.
     """
 
-    def __init__(self):
-        self._black_box = BlackBoxEvaluator()
+    def __init__(self, llm_judge=None):
+        self._black_box = BlackBoxEvaluator(llm_judge=llm_judge)
 
     def evaluate(self, scenario: TestScenario, responses: List[AgentResponse], mode: EvalMode) -> TestResult:
         result = self._black_box.evaluate(scenario, responses, mode)
