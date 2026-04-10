@@ -1,2 +1,14 @@
 node_modules
 .env
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+
+# Editor settings
+.vscode/
