@@ -1,0 +1,42 @@
+{
+  "agent_name": "Agent",
+  "agent_version": "1.0",
+  "scenario_id": "happy_001",
+  "responses_json": [
+    {
+      "output": "Hello! I'm here to assist you. How can I help you today?",
+      "reasoning_trace": "Received input: 'Hello! Can you help me today?' | Context-aware: user role is 'user' | Pattern matched: '\\b(hello|hi|hey|greetings)\\b'",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 24,
+        "latency_ms": 0
+      },
+      "latency": 0.0,
+      "error": null
+    },
+    {
+      "output": "Hello! I'm here to assist you. How can I help you today?",
+      "reasoning_trace": "Received input: 'Hello! Can you help me today?' | Context-aware: user role is 'user' | Pattern matched: '\\b(hello|hi|hey|greetings)\\b'",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 24,
+        "latency_ms": 0
+      },
+      "latency": 0.0,
+      "error": null
+    },
+    {
+      "output": "Hello! I'm here to assist you. How can I help you today?",
+      "reasoning_trace": "Received input: 'Hello! Can you help me today?' | Context-aware: user role is 'user' | Pattern matched: '\\b(hello|hi|hey|greetings)\\b'",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 24,
+        "latency_ms": 0
+      },
+      "latency": 0.0,
+      "error": null
+    }
+  ],
+  "created_at": "2026-04-10T23:19:44.194123+00:00",
+  "expires_at": "2026-04-11T23:19:44.194123+00:00"
+}

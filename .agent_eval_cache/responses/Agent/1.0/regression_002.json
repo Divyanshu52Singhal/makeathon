@@ -1,0 +1,42 @@
+{
+  "agent_name": "Agent",
+  "agent_version": "1.0",
+  "scenario_id": "regression_002",
+  "responses_json": [
+    {
+      "output": "I can help with calculations. Please provide the specific numbers and operation you'd like me to perform.",
+      "reasoning_trace": "Received input: 'Can you help me calculate 15 plus 27?' | Context-aware: user role is 'user' | Pattern matched: '\\b(calculate|compute|math|add|subtract|multiply)\\b'",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 34,
+        "latency_ms": 0
+      },
+      "latency": 0.0,
+      "error": null
+    },
+    {
+      "output": "I can help with calculations. Please provide the specific numbers and operation you'd like me to perform.",
+      "reasoning_trace": "Received input: 'Can you help me calculate 15 plus 27?' | Context-aware: user role is 'user' | Pattern matched: '\\b(calculate|compute|math|add|subtract|multiply)\\b'",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 34,
+        "latency_ms": 0
+      },
+      "latency": 0.0,
+      "error": null
+    },
+    {
+      "output": "I can help with calculations. Please provide the specific numbers and operation you'd like me to perform.",
+      "reasoning_trace": "Received input: 'Can you help me calculate 15 plus 27?' | Context-aware: user role is 'user' | Pattern matched: '\\b(calculate|compute|math|add|subtract|multiply)\\b'",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 34,
+        "latency_ms": 0
+      },
+      "latency": 0.0,
+      "error": null
+    }
+  ],
+  "created_at": "2026-04-10T23:19:47.302026+00:00",
+  "expires_at": "2026-04-11T23:19:47.302026+00:00"
+}

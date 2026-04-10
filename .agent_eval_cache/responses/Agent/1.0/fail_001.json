@@ -1,0 +1,29 @@
+{
+  "agent_name": "Agent",
+  "agent_version": "1.0",
+  "scenario_id": "fail_001",
+  "responses_json": [
+    {
+      "output": "Thank you for your query. Based on your input, I understand you're asking about: '!@#$%^&*() undefined null NaN TypeError'. I'd be happy to help. Could you provide more details so I can give you the most relevant assistance? I'm designed to help with a wide range of tasks including information retrieval, analysis, and recommendations.",
+      "reasoning_trace": "Received input: '!@#$%^&*() undefined null NaN TypeError' | Context-aware: user role is 'user' | No specific pattern matched - generating general response",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 108
+      },
+      "latency": 0.0,
+      "error": null
+    },
+    {
+      "output": "Thank you for your query. Based on your input, I understand you're asking about: '!@#$%^&*() undefined null NaN TypeError'. I'd be happy to help. Could you provide more details so I can give you the most relevant assistance? I'm designed to help with a wide range of tasks including information retrieval, analysis, and recommendations.",
+      "reasoning_trace": "Received input: '!@#$%^&*() undefined null NaN TypeError' | Context-aware: user role is 'user' | No specific pattern matched - generating general response",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 108
+      },
+      "latency": 0.0,
+      "error": null
+    }
+  ],
+  "created_at": "2026-04-10T23:19:45.647145+00:00",
+  "expires_at": "2026-04-11T23:19:45.647145+00:00"
+}

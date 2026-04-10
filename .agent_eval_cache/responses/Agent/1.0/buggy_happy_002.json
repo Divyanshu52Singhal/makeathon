@@ -1,0 +1,33 @@
+{
+  "agent_name": "Agent",
+  "agent_version": "1.0",
+  "scenario_id": "buggy_happy_002",
+  "responses_json": [
+    {
+      "output": "Thank you for your patience. We value your business and appreciate you reaching out to us today. Our team is always committed to providing the best possible service to all of our valued customers. We understand that your time is valuable and we want to make sure that every interaction you have with our support team is as smooth and efficient as possible. Regarding your calculation, I would need more specific information to proceed accurately.",
+      "reasoning_trace": null,
+      "tool_calls": [],
+      "token_usage": {},
+      "latency": 0.05777168273925781,
+      "error": null
+    },
+    {
+      "output": "Thank you for your patience. We value your business and appreciate you reaching out to us today. Our team is always committed to providing the best possible service to all of our valued customers. We understand that your time is valuable and we want to make sure that every interaction you have with our support team is as smooth and efficient as possible. Regarding your calculation, I would need more specific information to proceed accurately.",
+      "reasoning_trace": null,
+      "tool_calls": [],
+      "token_usage": {},
+      "latency": 0.05026388168334961,
+      "error": null
+    },
+    {
+      "output": "Thank you for your patience. We value your business and appreciate you reaching out to us today. Our team is always committed to providing the best possible service to all of our valued customers. We understand that your time is valuable and we want to make sure that every interaction you have with our support team is as smooth and efficient as possible. Regarding your calculation, I would need more specific information to proceed accurately.",
+      "reasoning_trace": null,
+      "tool_calls": [],
+      "token_usage": {},
+      "latency": 0.05071449279785156,
+      "error": null
+    }
+  ],
+  "created_at": "2026-04-10T23:20:59.897679+00:00",
+  "expires_at": "2026-04-11T23:20:59.897679+00:00"
+}

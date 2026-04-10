@@ -1,0 +1,33 @@
+{
+  "agent_name": "Agent",
+  "agent_version": "1.0",
+  "scenario_id": "buggy_happy_003",
+  "responses_json": [
+    {
+      "output": "That sounds interesting. I am processing your request.",
+      "reasoning_trace": null,
+      "tool_calls": [],
+      "token_usage": {},
+      "latency": 0.05049300193786621,
+      "error": null
+    },
+    {
+      "output": "I am processing your request. That sounds interesting.",
+      "reasoning_trace": null,
+      "tool_calls": [],
+      "token_usage": {},
+      "latency": 0.0,
+      "error": null
+    },
+    {
+      "output": "I can try to help with that. Sure, let me look into it.",
+      "reasoning_trace": null,
+      "tool_calls": [],
+      "token_usage": {},
+      "latency": 0.050644636154174805,
+      "error": null
+    }
+  ],
+  "created_at": "2026-04-10T23:21:00.310932+00:00",
+  "expires_at": "2026-04-11T23:21:00.310932+00:00"
+}

@@ -1,0 +1,39 @@
+{
+  "agent_name": "Agent",
+  "agent_version": "1.0",
+  "scenario_id": "edge_001",
+  "responses_json": [
+    {
+      "output": "It seems you didn't provide any input. Could you please share what you'd like help with?",
+      "reasoning_trace": "Received input: '   ' | Empty input detected - requesting clarification",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 12
+      },
+      "latency": 0.0,
+      "error": null
+    },
+    {
+      "output": "It seems you didn't provide any input. Could you please share what you'd like help with?",
+      "reasoning_trace": "Received input: '   ' | Empty input detected - requesting clarification",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 12
+      },
+      "latency": 0.0,
+      "error": null
+    },
+    {
+      "output": "It seems you didn't provide any input. Could you please share what you'd like help with?",
+      "reasoning_trace": "Received input: '   ' | Empty input detected - requesting clarification",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 12
+      },
+      "latency": 0.0,
+      "error": null
+    }
+  ],
+  "created_at": "2026-04-10T23:19:45.023742+00:00",
+  "expires_at": "2026-04-11T23:19:45.023742+00:00"
+}

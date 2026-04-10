@@ -1,0 +1,29 @@
+{
+  "agent_name": "Agent",
+  "agent_version": "1.0",
+  "scenario_id": "edge_003",
+  "responses_json": [
+    {
+      "output": "Thank you for your query. Based on your input, I understand you're asking about: 'I need help with the following extremely complex situation that involves many mo'. I'd be happy to help. Could you provide more details so I can give you the most relevant assistance? I'm designed to help with a wide range of tasks including information retrieval, analysis, and recommendations.",
+      "reasoning_trace": "Received input: 'I need help with the following extremely complex situation that involves many moving parts and consi' | Context-aware: user role is 'user' | No specific pattern matched - generating general response",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 124
+      },
+      "latency": 0.0023279190063476562,
+      "error": null
+    },
+    {
+      "output": "Thank you for your query. Based on your input, I understand you're asking about: 'I need help with the following extremely complex situation that involves many mo'. I'd be happy to help. Could you provide more details so I can give you the most relevant assistance? I'm designed to help with a wide range of tasks including information retrieval, analysis, and recommendations.",
+      "reasoning_trace": "Received input: 'I need help with the following extremely complex situation that involves many moving parts and consi' | Context-aware: user role is 'user' | No specific pattern matched - generating general response",
+      "tool_calls": [],
+      "token_usage": {
+        "total_tokens": 124
+      },
+      "latency": 0.0,
+      "error": null
+    }
+  ],
+  "created_at": "2026-04-10T23:19:45.438416+00:00",
+  "expires_at": "2026-04-11T23:19:45.438416+00:00"
+}
